@@ -1,0 +1,6 @@
+#ifndef _CFPM_CONFIG_H_
+#define _CFPM_CONFIG_H_
+
+#define CFPM_VERSION "@cfpm_VERSION@"
+
+#endif /* _CFPM_CONFIG_H_ */
