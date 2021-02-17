@@ -1,22 +1,30 @@
-sudo: false
-
 language: cpp
 
 compiler: [clang, gcc]
-os: [windows, osx, linux]
-dist:
-  - xenial
-  - bionic
+os: [osx, linux]
+dist: focal
+
 osx_image:
-  - xcode9.4
   - xcode10
   - xcode11
   - xcode12
-  - xcode12.2
+
+jobs:
+  include:
+    - os: windows
+
+git:
+  depth: 1
 
 script:
   - mkdir build
   - cd build
-  - cmake ..
-  - make
-  - make test
+  - |
+    if [ "$TRAVIS_OS_NAME" = "windows" ]
+      then
+        cmake .. -G 'MinGW Makefiles'
+      else
+        cmake ..
+    fi
+  - cmake --build .
+  - ctest -VV
